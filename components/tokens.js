@@ -58,7 +58,7 @@ export const Tokens = () => {
           </HoverCard>
           
           <p className="text-[14px]  font-serif text-gray-600">Train on</p> 
-          <Button className="w-fit">{tokens}T</Button>
+          <Button className="max-w-[147px]">{tokens}T</Button>
           <p className="text-[14px]  font-serif text-gray-600">Tokens</p> 
         </div>
         
