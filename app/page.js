@@ -1,6 +1,5 @@
 "use client"
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { Compute } from '@/components/compute'
 import { Tokens } from '@/components/tokens';
 import { Flops } from '@/components/flops';
@@ -8,7 +7,7 @@ import {CurvedlineChart} from "@/components/chart"
 import { MdScience } from "react-icons/md";
 import {Collapsible,CollapsibleContent,CollapsibleTrigger,} from "@/components/ui/collapsible"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
+import { FaGithub } from "react-icons/fa6";
 
 export default function Home() {
   return (
@@ -25,9 +24,10 @@ export default function Home() {
             <li>For a given model size, data tokens or training time, what are the costs concurred, FLOPs consumed and tons of CO2 emitted by a given number of GPUs for training?</li>
           </ul>
           <Collapsible>
-            <CollapsibleTrigger className="text-[14px] font-sans font-semibold w-full text-left my-3">At the end &#8594;</CollapsibleTrigger>
+            <CollapsibleTrigger className="text-[14px] font-sans font-semibold w-full text-left my-3">Credits &#8594;</CollapsibleTrigger>
             <CollapsibleContent className="text-[14px] font-sans mt-1">
-              You can find all the <span className='font-semibold underline'>sources</span>, references, and the <span className='font-semibold underline'>colab notebook</span> used for these calcuations. Let's begin! 
+              <p className="font-sans text-[14px] mb-4">This project is by <span className='font-semibold underline'><a href='https://tanaydesai.com'>@tanaydesai</a></span> and is available on <span className='inline-flex items-center px-0.5'><FaGithub size={13}/></span> <span className='font-semibold underline'><a href='https://github.com/tanaydesai/scaling-laws'>GitHub</a></span>.</p>
+              You can find all the <span className='font-semibold'>sources</span> and references used for these calcuations at the end. Let's begin!             
             </CollapsibleContent>
           </Collapsible>
         </div>
@@ -52,7 +52,19 @@ export default function Home() {
 
         <div className="flex flex-col gap-3 my-10">
             <h2 className="font-serif text-[23px]">Sources</h2>
-            <p className="font-sans text-[14px] mt-4">This section will deal with the first question. First you require a compute budget (C), but if you don't know how to determine yours, this should also help you out.</p>
+            <p className="font-sans text-[14px]">This project is available on <span className='inline-flex items-center px-0.5'><FaGithub size={13}/></span> <span className='font-semibold underline'><a href='https://github.com/tanaydesai/scaling-laws'>GitHub</a></span>.</p>
+
+            <p className="font-sans text-[14px] my-4">All the numbers, metrics, formulas and fact-checking used and done for in this project have been sourced from various articles, tweets and research papers mentioned below.</p>
+            <ul className="font-sans text-[14px] list-disc list-inside font-semibold underline">
+              <li><a href='https://arxiv.org/pdf/2001.08361'>Kaplan et al. (2020)</a></li>
+              <li><a href='https://arxiv.org/pdf/2203.15556'>Hoffmann et al. (2022) </a></li>
+              <li><a href='https://epochai.org/blog/tracking-compute-intensive-ai-models6'>Epochai: Tracking Compute-Intensive AI Models.</a></li>
+              <li><a href='https://www.lesswrong.com/posts/pckLdSgYWJ38NBFf8/gpt-4#2mKqGJnf2aTfQMZDq'>GPT-4 Estimates.</a></li>
+              <li><a href='https://twitter.com/karpathy/status/1781028605709234613'>Andrej karpathy's write up which covers extensive details about llama 3 models.</a></li>
+              <li><a href='https://github.com/meta-llama/llama3/blob/main/MODEL_CARD.md'>Llama 3 Model Card: All numbers used for llama 3 are taken from here.</a></li>
+              <li><a href='https://colab.research.google.com/drive/1O99z9b1I5O66bT78r9ScslE_nOj5irN9?usp=sharing#scrollTo=tRnfGB3bPhQ9'>Colab notebook: Cost estimates for GPT-4.</a></li>
+            </ul>
+            <p className="font-sans text-[14px] mt-4">I hope this project is helpful in any way and would love to hear any feedback on project improvements/suggestions as well as any corrections needed in the calcuations!</p>
         </div>
 
         <div className='h-[1.5px] border-none bg-gray-200 w-[50px] mx-auto mt-[80px]' />

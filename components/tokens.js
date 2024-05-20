@@ -62,7 +62,7 @@ export const Tokens = () => {
           <p className="text-[14px]  font-serif text-gray-600">Tokens</p> 
         </div>
         
-        <p className="font-sans text-[14px] mt-4">This calculator follows scaling laws spelled out by <span className="font-semibold underline"><a href="https://arxiv.org/pdf/2203.15556">Chinchilla</a></span>.</p>
+        <p className="font-sans text-[14px] mt-4">This calculator follows scaling laws spelled out by Chinchilla, <span className="font-semibold underline"><a href="https://arxiv.org/pdf/2203.15556">Hoffmann et al. (2022) </a></span>.</p>
 
     </div>
   );
