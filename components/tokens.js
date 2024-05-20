@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { HoverCard,HoverCardContent,HoverCardTrigger,} from "@/components/ui/hover-card"
+import { LuDatabase  } from "react-icons/lu";
 
 
 export const Tokens = () => {
@@ -45,7 +46,7 @@ export const Tokens = () => {
 
   return (
     <div className="flex flex-col gap-3 my-10">
-        <h2 className="font-serif text-[23px]">Tokens</h2>
+        <h2 className="font-serif text-[23px]  flex gap-2 items-center">Tokens <LuDatabase /></h2>
         <p className="font-sans text-[14px] mt-4">This section will deal with the second question and is pretty <span className="font-semibold">straightforward</span>, all you need is the number of model parameters (N) which can be any desired number.</p>
 
         <div className="flex items-center gap-2 my-2">

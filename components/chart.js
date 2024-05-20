@@ -1,78 +1,57 @@
+"use client"
+import React, {useState, useEffect} from 'react'
 import { ResponsiveLine } from "@nivo/line"
+import { ResponsiveScatterPlot } from "@nivo/scatterplot"
+import { data } from '@/lib/data'
 
 
-export const CurvedlineChart = (props) => {
+  export const CurvedlineChart = (props) => {
     return (
-      <div {...props}>
-        <ResponsiveLine
-          data={[
-            {
-              id: "Desktop",
-              data: [
-                { x: "Jan", y: 43 },
-                { x: "Feb", y: 137 },
-                { x: "Mar", y: 61 },
-                { x: "Apr", y: 145 },
-                { x: "May", y: 26 },
-                { x: "Jun", y: 154 },
-              ],
-            },
-            {
-              id: "Mobile",
-              data: [
-                { x: "Jan", y: 60 },
-                { x: "Feb", y: 48 },
-                { x: "Mar", y: 177 },
-                { x: "Apr", y: 78 },
-                { x: "May", y: 96 },
-                { x: "Jun", y: 204 },
-              ],
-            },
-          ]}
-          margin={{ top: 10, right: 10, bottom: 40, left: 40 }}
+      <div {...props} className='w-full h-[400px] mt-5'>
+        <ResponsiveScatterPlot
+          data={data}
+          margin={{ top: 10, right: 10, bottom: 40, left: 55 }}
           xScale={{
-            type: "point",
+            type: 'time',
+            format: '%d-%m-%Y',
+            precision: 'day',
+            min: '01-06-2021',
           }}
-          yScale={{
-            type: "linear",
-            min: 0,
-            max: "auto",
-          }}
-          curve="monotoneX"
+          xFormat="time:%d-%m-%Y" 
+          yScale={{ type: 'symlog',min: 1e23, max: 1e26,base: 10 }}
+          yFormat=">-.2e"
+          gridYValues={[1e23,2e23, 5e23, 1e24,2e24, 5e24, 1e25,2e25, 3e25, 5e25, 1e26]}
+          blendMode="multiply"
           axisTop={null}
           axisRight={null}
           axisBottom={{
-            tickSize: 0,
-            tickPadding: 16,
-          }}
-          axisLeft={{
-            tickSize: 0,
-            tickValues: 5,
-            tickPadding: 16,
-          }}
-          colors={["#2563eb", "#e11d48"]}
-          pointSize={6}
+            legend: 'Year',
+            legendPosition: 'middle',
+            tickSize: 5,
+            legendOffset: 35,
+            format: '%Y',
+            tickValues: 'every 1 year',
+          }} 
+          axisLeft={{tickSize: 0,tickPadding: 5, orient: 'left',legend: 'Compute (FLOP)',legendPosition: 'middle',legendOffset: -50,tickValues: [1e23,2e23, 5e23, 1e24,2e24, 5e24, 1e25,2e25, 3e25, 5e25, 1e26],format: '.2f'}}
+          colors={["red", "#e11d48"]}
           useMesh={true}
-          gridYValues={6}
-          theme={{
-            tooltip: {
-              chip: {
-                borderRadius: "9999px",
-              },
-              container: {
-                fontSize: "12px",
-                textTransform: "capitalize",
-                borderRadius: "6px",
-              },
-            },
-            grid: {
-              line: {
-                stroke: "#f3f4f6",
-              },
-            },
-          }}
-          role="application" />
+          tooltip={({node}) => <ToolTip {...node.data} />}
+          />
       </div>
     );
   }
   
+const ToolTip = (props) => {
+
+  return(
+    <div className='min-w-[200px] max-w-[260px] h-auto bg-gray-200 rounded-[6px] text-center text-[14px] shadow-md text-black'>
+        <div className='w-full border-b-2 p-2 border-gray-300 flex '><div className='w-[70px]'>Model:</div> <div>{props.System}</div></div>
+
+        <div className='w-full border-b-2 p-2 border-gray-300 flex '><div className='w-[70px]'>Parameters:</div><div>{props.Size ? `${props.Size/1e9}B` : "N/A"}</div></div>
+        <div className='w-full border-b-2 p-2 border-gray-300'>Compute: {props.y}</div>
+        <div className='w-full border-b-2 p-2 border-gray-300'>Data: {props.Dataset ? `${props.Dataset/1e12}T` : "N/A"}</div>
+        <div className='w-full border-b-2 p-2 border-gray-300'>{props.Organization}</div>
+        {props.GPUs && props.GPU && <div className='w-full border-b-2 p-2 border-gray-300'>{props.GPUs / 1e3}K {props.GPU ? props.GPU : "GPUs"}</div>}
+    </div>
+  )
+}
