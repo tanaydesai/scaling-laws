@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components{
+  body {
+    @apply bg-[#dbdbdb]/[0.3]
+  }
+    /* #d6d6d6 #dbdbdb */
+
+}

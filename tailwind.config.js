@@ -7,7 +7,9 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    
+    backgroundImage: {
+      grain: "url('/grain.jpeg')",
+    }
   },
   plugins: [require("tailwindcss-animate")],
 }
