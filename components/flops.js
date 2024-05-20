@@ -145,7 +145,7 @@ export const Flops = () => {
         {data && mode == "size" &&
           <div className="flex items-center flex-wrap gap-2 my-2 mt-5">
           <p className="text-[14px]  font-serif text-gray-600">Your </p> 
-          <Button className="w-fit">{Number(params)/1e12}T</Button>
+          <Button className="w-fit">{Number(params)/1e9}B</Button>
           <p className="text-[14px]  font-serif text-gray-600">parameter model trained for </p> 
           <Button className="w-fit">{data.gpuhours/1e6}M</Button>
           <p className="text-[14px]  font-serif text-gray-600">GPU hours or</p> 

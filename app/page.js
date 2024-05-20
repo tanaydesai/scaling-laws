@@ -45,7 +45,7 @@ export default function Home() {
 
         <div className="flex flex-col gap-3 my-10">
             <h2 className="font-serif text-[23px]">Future</h2>
-            <p className="font-sans text-[14px] mt-4">Here is a graph of major models trained by frontier artificial intelligence labs. <span className='font-semibold underline'>The Biden Executive Order</span> had the reporting requirement set at <span className='font-semibold'>1e26</span>, as you can see, we are approaching that threshold very quickly with the largest model trained in terms of compute being <span className='font-semibold'>Google DeepMind's Gemini 1.0 Ultra</span> as per April 2024.</p>
+            <p className="font-sans text-[14px] mt-4">Here is a graph of major models trained by frontier artificial intelligence labs. <span className='font-semibold underline'><a href='https://www.whitehouse.gov/briefing-room/statements-releases/2023/10/30/fact-sheet-president-biden-issues-executive-order-on-safe-secure-and-trustworthy-artificial-intelligence/'>The Biden Executive Order</a></span> had the reporting requirement set at <span className='font-semibold'>1e26</span>, as you can see, we are approaching that threshold very quickly with the largest model trained in terms of compute being <span className='font-semibold'>Google DeepMind's Gemini 1.0 Ultra</span> as per April 2024.</p>
             <CurvedlineChart />
             <p className="font-sans text-[14px] mt-4">This dataset and several other detailed articles covering the ongoing artificial intelligence revolution can be found at <span className='font-semibold underline'><a href='https://epochai.org/blog/tracking-compute-intensive-ai-models'>Epochai.org</a></span>!</p>
         </div>
