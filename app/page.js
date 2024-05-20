@@ -56,7 +56,10 @@ export default function Home() {
         </div>
 
         <div className='h-[1.5px] border-none bg-gray-200 w-[50px] mx-auto mt-[80px]' />
-
+        <div className='mx-auto mt-10 text-center w-fit'>
+          <p className="font-serif text-[17px] flex gap-2 items-center">Scaling Laws</p>
+          <p className="font-sans text-[12px] my-2"><a href='https:///tanaydesai.com/'>Tanay Desai &#8594;</a></p>
+        </div>
   </div>
   )
 }
