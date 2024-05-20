@@ -7,7 +7,7 @@ import {Select,SelectContent,SelectItem,SelectTrigger,SelectValue,} from "@/comp
 import { GoCpu } from "react-icons/go";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { HoverCard,HoverCardContent,HoverCardTrigger,} from "@/components/ui/hover-card"
-import { GiReceiveMoney  } from "react-icons/gi";
+import { MdEnergySavingsLeaf } from "react-icons/md";
 
 export const Flops = () => {
   const [params, setParams] = useState(0)
@@ -36,6 +36,7 @@ export const Flops = () => {
       needed: Math.floor(flops_needed),
       used: Math.floor(flops * time_needed_s * gpus),
       price:time_needed_s / 3600 * 4 * gpus,
+      energy:  Math.floor((time_needed_s / 3600) * gpus) * 0.7 * 0.42 / 1e3
     })
 
   }
@@ -51,6 +52,7 @@ export const Flops = () => {
       needed: 0,
       used: Math.floor(flops * time_needed_s * gpus),
       price:time_needed_s / 3600 * 4 * gpus,
+      energy:  Math.floor((time_needed_s / 3600) * gpus * 0.7 * 0.42 / 1e3)
     })
 
   }
@@ -59,7 +61,7 @@ export const Flops = () => {
 
   return (
     <div className="flex flex-col gap-3 my-10">
-        <h2 className="font-serif text-[23px] flex gap-2 items-center">Time, Money and FLOPs <GiReceiveMoney  /></h2>
+        <h2 className="font-serif text-[23px] flex gap-2 items-center">Energy, Money and FLOPs <MdEnergySavingsLeaf  /></h2>
         <p className="font-sans text-[14px] mt-4">Perhaps the most interesting, this section will deal with the third and final question. You can either input the time taken for a model training run or the model size and data used. This info is often provided my frontier labs or is leaked to the public overtime.</p>
         
         <RadioGroup onValueChange={(e) =>{ 
@@ -119,14 +121,13 @@ export const Flops = () => {
                 <HoverCardTrigger asChild><Input className="bg-gray-200 outline-none" value={pflops} onChange={(e) => setPflops(e.target.value)} placeholder="0" type="number" /></HoverCardTrigger>
                 <HoverCardContent side="top" className="w-fit p-2 font-sans text-[14px]">peak FLOPs</HoverCardContent>
               </HoverCard>
-              <Select>
+              <Select onValueChange={(e) => setPflops(e)}>
                 <SelectTrigger className="w-fit bg-gray-200">
-                      <GoCpu />
+                    <GoCpu />
                 </SelectTrigger>
                 <SelectContent className="w-fit bg-gray-200">
-                  <SelectItem value="light">Light</SelectItem>
-                  <SelectItem value="dark">Dark</SelectItem>
-                  <SelectItem value="system">System</SelectItem>
+                  <SelectItem value={400e12}>NVIDIA H100 SXM</SelectItem>
+                  <SelectItem value={312e12}>NVIDIA A100</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -159,7 +160,13 @@ export const Flops = () => {
           <Button className="w-fit">${data.price/1e6}M</Button>
           <p className="text-[14px]  font-serif text-gray-600"> at a rate of</p> 
           <Button className="w-fit">$4.0</Button>
-          <p className="text-[14px]  font-serif text-gray-600">per GPU/per hour.</p> 
+          <p className="text-[14px]  font-serif text-gray-600">per GPU/per hour. Total CO2 emitted is</p> 
+          <Button className="w-fit">{data.energy} tCO2e</Button>
+          <p className="text-[14px]  font-serif text-gray-600">which is equivalent to</p>
+          <Button className="w-fit">{Math.floor(data.energy / 24)}</Button>
+          <p className="text-[14px]  font-serif text-gray-600">car lifetimes and can be offset by purchasing</p>
+          <Button className="w-fit">${(data.energy * 90 / 1e6).toFixed(2)}M</Button>
+          <p className="text-[14px]  font-serif text-gray-600">in carbon credits.</p>
         </div>}
 
         {data && mode == "time" &&
@@ -176,23 +183,34 @@ export const Flops = () => {
           <Button className="w-fit">${data.price/1e6}M</Button>
           <p className="text-[14px]  font-serif text-gray-600"> at a rate of</p> 
           <Button className="w-fit">$4.0</Button>
-          <p className="text-[14px]  font-serif text-gray-600">per GPU/per hour.</p> 
+          <p className="text-[14px]  font-serif text-gray-600">per GPU/per hour. Total CO2 emitted is</p> 
+          <Button className="w-fit">{data.energy} tCO2e</Button>
+          <p className="text-[14px]  font-serif text-gray-600">which is equivalent to</p>
+          <Button className="w-fit">{Math.floor(data.energy / 24)}</Button>
+          <p className="text-[14px]  font-serif text-gray-600">car lifetimes and can be offset by purchasing</p>
+          <Button className="w-fit">${(data.energy * 90 / 1e6).toFixed(2)}M</Button>
+          <p className="text-[14px]  font-serif text-gray-600">in carbon credits.</p>
         </div>}
 
-        <p className="font-sans text-[14px] mt-4">The formuals that go behind this calcuator are:</p>
-        <div className="[&::-webkit-scrollbar]:hidden  text-[16px] font-serif text-gray-600 bg-gray-200/[0.5] rounded-md overflow-auto p-2 my-3 whitespace-nowrap">
-          <p>FLOPs needed = <span className="tracking-widest"> 6 x N x D</span></p>
-          <p>FLOPs throughput = <span className="tracking-widest"> peak FLOPs x no of GPUs x 0.4 (assumed flops utilization rate)</span></p>
-          <p>Training Time (s) = <span className="tracking-widest"> flops needed / flops throughput</span></p>
-          <p>FLOPs used = <span className="tracking-widest"> peak FLOPs x no. of GPUs x training time (s)</span></p>
-        </div>
+        
         <Collapsible>
-          <CollapsibleTrigger className="text-[14px] font-sans font-semibold w-full text-left my-3">Note &#8594;</CollapsibleTrigger>
+          <CollapsibleTrigger className="text-[14px] font-sans font-semibold w-full text-left my-3">Examples & Formuals &#8594;</CollapsibleTrigger>
           <CollapsibleContent className="text-[14px] font-sans mt-1">
-             As per Meta AI, Llama-3-70B was trained for 6.4M GPU hours on 16k H100s with a peak FLOPs of 400e12, this translates to 400 hours of training time. Thus llama-3-70b is a ~9e24 model.
+            <p className="font-sans text-[14px] mt-4">The formuals that go behind this calcuator are:</p>
+            <div className="[&::-webkit-scrollbar]:hidden  text-[16px] font-serif text-gray-600 bg-gray-200/[0.5] rounded-md overflow-auto p-2 my-3 whitespace-nowrap">
+              <p>FLOPs needed = <span className="tracking-widest"> 6 x N x D</span></p>
+              <p>FLOPs throughput = <span className="tracking-widest"> peak FLOPs x no of GPUs x 0.4 (assumed flops utilization rate)</span></p>
+              <p>Training Time (s) = <span className="tracking-widest"> flops needed / flops throughput</span></p>
+              <p>FLOPs used = <span className="tracking-widest"> peak FLOPs x no. of GPUs x training time (s)</span></p>
+              <p>CO2 Emmited = <span className="tracking-widest"> gpu hours x 0.7kwh (H100 TDP) x 0.42 (kg CO2e/kWh)</span></p>
+              <p>US Avg. Car lifetime ~= <span className="tracking-widest">24 tCO2e</span></p>
+              <p>EU ETS rate = <span className="tracking-widest">$85-$110 per ton of CO2.</span></p>
+            </div>
+             As per Meta AI, Llama-3-70B was trained for 6.4M GPU hours on 16k H100s with a peak FLOPs of 400e12 and emitted 1900 tCO2e, this translates to 400 hours of training time. Thus llama-3-70b is a ~9e24 model.
+            <p className="font-sans text-[14px] mt-4">Hourly gpu rates to calcuate cost of training are taken from <span className="font-semibold underline"><a href="https://lambdalabs.com/">lambdalabs</a></span>.</p>
           </CollapsibleContent>
         </Collapsible>
-        <p className="font-sans text-[14px] mt-4">Hourly rates to calcuate cost of training are taken from <span className="font-semibold underline">lambdalabs</span>. These metrics are mere estiamtions based on a few assumptions and paper math scaling laws. Things like gpu cluster performance, costs and mfu can vary significantly due to multiple factors and are a great engineering challenge!.</p>
+        <p className="font-sans text-[14px] mt-4">These metrics are mere estiamtions based on a few assumptions and paper math scaling laws. Things like gpu cluster performance, costs and mfu can vary significantly due to multiple factors and are a great engineering challenge!.</p>
         <p className="font-sans text-[14px] mt-4">This tool is only to give you a glimpse of the maths and numbers that go behind model training.</p>
 
     </div>

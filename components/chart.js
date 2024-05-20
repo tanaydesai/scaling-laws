@@ -44,14 +44,13 @@ import { data } from '@/lib/data'
 const ToolTip = (props) => {
 
   return(
-    <div className='min-w-[200px] max-w-[260px] h-auto bg-gray-200 rounded-[6px] text-center text-[14px] shadow-md text-black'>
-        <div className='w-full border-b-2 p-2 border-gray-300 flex '><div className='w-[70px]'>Model:</div> <div>{props.System}</div></div>
-
-        <div className='w-full border-b-2 p-2 border-gray-300 flex '><div className='w-[70px]'>Parameters:</div><div>{props.Size ? `${props.Size/1e9}B` : "N/A"}</div></div>
-        <div className='w-full border-b-2 p-2 border-gray-300'>Compute: {props.y}</div>
-        <div className='w-full border-b-2 p-2 border-gray-300'>Data: {props.Dataset ? `${props.Dataset/1e12}T` : "N/A"}</div>
-        <div className='w-full border-b-2 p-2 border-gray-300'>{props.Organization}</div>
-        {props.GPUs && props.GPU && <div className='w-full border-b-2 p-2 border-gray-300'>{props.GPUs / 1e3}K {props.GPU ? props.GPU : "GPUs"}</div>}
+    <div className='min-w-[200px] max-w-[260px] h-auto bg-gray-200 rounded-[6px] text-left text-[14px] shadow-md text-black'>
+        <div className='w-full border-b-2 p-2 border-gray-300 flex '><div className='w-[90px] font-semibold'>Model:</div> <div>{props.System}</div></div>
+        <div className='w-full border-b-2 p-2 border-gray-300 flex'><div className='w-[90px] font-semibold flex-shrink-0'>Parameters:</div><div>{props.Size ? `${props.Size/1e9}B` : "N/A"}</div></div>
+        <div className='w-full border-b-2 p-2 border-gray-300 flex'><div className='w-[90px] font-semibold flex-shrink-0 '>Compute:</div><div>{props.y}</div></div>
+        <div className='w-full border-b-2 p-2 border-gray-300 flex'><div className='w-[90px] font-semibold flex-shrink-0'>Data:</div><div>{props.Dataset ? `${props.Dataset/1e12}T` : "N/A"}</div></div>
+        <div className='w-full border-b-2 p-2 border-gray-300 flex'><div className='w-[90px] font-semibold flex-shrink-0'>Company:</div><div>{props.Organization}</div></div>
+        {props.GPUs && props.GPU && <div className='w-full border-b-2 p-2 border-gray-300 flex'><div className='w-[90px] font-semibold flex-shrink-0'>Hardware:</div><div className='h-auto '>{props.GPUs / 1e3}K {props.GPU ? props.GPU : "GPUs"}</div></div>}
     </div>
   )
 }

@@ -21,7 +21,7 @@ export const Compute = () => {
   return (
     <div className="flex flex-col gap-3 my-10">
         <h2 className="font-serif text-[23px] flex gap-2 items-center">Compute <LuCpu /></h2>
-        <p className="font-sans text-[14px] mt-4">This section will deal with the first question. How do you calcuate a compute (C)? Here is a simple formula that detemines the total compute used:</p>
+        <p className="font-sans text-[14px] mt-4">This section will deal with the first question. How do you calcuate compute (C)? Here is a simple formula that detemines the total compute used:</p>
         
         <p className="[&::-webkit-scrollbar]:hidden  text-[16px] font-serif text-gray-600 bg-gray-200 rounded-md overflow-auto p-2 my-3 whitespace-nowrap">Total compute = <span className="tracking-widest"> *peak FLOPs x number of GPUs x training time (s)</span></p>
         <RadioGroup onValueChange={(e) => {
@@ -57,18 +57,16 @@ export const Compute = () => {
             <HoverCardTrigger className="w-full md:w-fit"><Input value={flops} onChange={(e) => {setFlops(e.target.value);getTotal(e.target.value, gpus, time)}} className="md:w-[100px] outline-none bg-gray-200" defaultValue={0}  type="number" /></HoverCardTrigger>
             <HoverCardContent side="top" className="w-fit p-2 font-sans text-[14px]">peak FLOPs</HoverCardContent>
           </HoverCard>
-
+          <p className="text-[14px] text-center font-serif text-gray-600">x</p> 
           <HoverCard>
             <HoverCardTrigger className="w-full flex items-center gap-2 md:w-fit">
-              <p className="text-[14px] text-center font-serif text-gray-600">x</p> 
               <Input value={gpus} onChange={(e) => {setGpus(e.target.value);getTotal(flops, e.target.value, time)}} className="md:w-[100px] outline-none bg-gray-200" defaultValue={0} type="number" />
             </HoverCardTrigger>
             <HoverCardContent side="top" className="w-fit p-2 font-sans text-[14px]"># of GPUs</HoverCardContent>
           </HoverCard>
-
+          <p className="text-[14px]  text-center font-serif text-gray-600">x</p> 
           <HoverCard>
             <HoverCardTrigger className="w-full flex items-center gap-2 md:w-fit">
-              <p className="text-[14px]  text-center font-serif text-gray-600">x</p> 
               <Input value={time} onChange={(e) => {setTime(e.target.value);getTotal(flops, gpus, e.target.value)}} className="md:w-[100px] outline-none bg-gray-200" defaultValue={0} type="number" />
             </HoverCardTrigger>
             <HoverCardContent side="top" className="w-fit p-2 font-sans text-[14px]">training time (s)</HoverCardContent>
@@ -81,7 +79,9 @@ export const Compute = () => {
         <Collapsible className="my-5 mb-6">
           <CollapsibleTrigger className="text-[14px] font-sans font-semibold w-full text-left my-3">Note &#8594;</CollapsibleTrigger>
           <CollapsibleContent className="text-[14px] font-sans mt-1">
-            * Example: 400-900 TFLOPs for an H100. You get this number from your chip provider like NVIDIA. This calcuator assumes a generous utilization rate of 40%
+            *400-900 TFLOPs for an H100 at fp16. You get this number from your chip provider like NVIDIA. This calcuator assumes a generous utilization rate of 40%
+            <p className="font-sans text-[14px] mt-4">Meta AI trained llama-3-70b for 6.6M GPU hours on their cluster of 16k H100 with 400e12 peak FLOPs.</p>
+            <p className="font-sans text-[14px] mt-4">GPT-4 numbers are based on online leaks.</p>
           </CollapsibleContent>
         </Collapsible>
     </div>
