@@ -15,11 +15,11 @@ export default function Home() {
 
         <div className="flex flex-col gap-6">
           <p className="font-serif text-[27px] flex gap-2 items-center">Scaling Laws  <MdScience/></p>
-          <p className="font-sans text-[14px]">The point to which Scaling laws <span className='font-semibold underline'><a href='https://arxiv.org/pdf/2001.08361'>Kaplan et al. (2020)</a></span> govern the current artificial intelligence revolution is vastly unknown and underappretiate given the predictability and clear future trends spelled out by them.</p>
-          <p className="font-sans text-[14px]">This site aspires to demystify scailing laws and make them accessible and eaiser to comphrehend via a few mini-calcuators.</p>
+          <p className="font-sans text-[14px]">The point to which Scaling laws <span className='font-semibold underline'><a href='https://arxiv.org/pdf/2001.08361'>Kaplan et al. (2020)</a></span> govern the current artificial intelligence revolution is vastly unknown and underappreciated given the predictability and clear future trends spelt out by them.</p>
+          <p className="font-sans text-[14px]">This site aspires to demystify scaling laws and make them accessible and easier to comprehend via a few mini-calculators.</p>
           <p className="font-sans text-[14px]">These tools mainly aim to <span className='font-semibold'>answer and visualize</span> three simple questions:</p>
           <ul className="font-sans text-[14px] list-disc list-inside">
-            <li>How do you calcuate total compute used in model training?</li>
+            <li>How do you calculate the total compute used in model training?</li>
             <li>For a given model size what is the compute-optimal number of tokens to train for?</li>
             <li>For a given model size, data tokens or training time, what are the costs concurred, FLOPs consumed and tons of CO2 emitted by a given number of GPUs for training?</li>
           </ul>
@@ -64,7 +64,7 @@ export default function Home() {
               <li><a href='https://github.com/meta-llama/llama3/blob/main/MODEL_CARD.md'>Llama 3 Model Card: All numbers used for llama 3 are taken from here.</a></li>
               <li><a href='https://colab.research.google.com/drive/1O99z9b1I5O66bT78r9ScslE_nOj5irN9?usp=sharing#scrollTo=tRnfGB3bPhQ9'>Colab notebook: Cost estimates for GPT-4.</a></li>
             </ul>
-            <p className="font-sans text-[14px] mt-4">I hope this project is helpful in any way and would love to hear any feedback on project improvements/suggestions as well as any corrections needed in the calcuations!</p>
+            <p className="font-sans text-[14px] mt-4">I hope this project is helpful in any way and would love to hear any feedback on project improvements/suggestions as well as any corrections needed in the calculations!</p>
         </div>
 
         <div className='h-[1.5px] border-none bg-gray-200 w-[50px] mx-auto mt-[80px]' />

@@ -62,7 +62,7 @@ export const Flops = () => {
   return (
     <div className="flex flex-col gap-3 my-10">
         <h2 className="font-serif text-[23px] flex gap-2 items-center">Energy, Money and FLOPs <MdEnergySavingsLeaf  /></h2>
-        <p className="font-sans text-[14px] mt-4">Perhaps the most interesting, this section will deal with the third and final question. You can either input the time taken for a model training run or the model size and data used. This info is often provided my frontier labs or is leaked to the public overtime.</p>
+        <p className="font-sans text-[14px] mt-4">Perhaps the most interesting, this section will deal with the third and final question. You can either input the time taken for a model training run or the model size and data used. This info is often provided by frontier labs or is leaked to the public over time.</p>
         
         <RadioGroup onValueChange={(e) =>{ 
           if (e == "size" || e == "time") {
@@ -207,10 +207,10 @@ export const Flops = () => {
               <p>EU ETS rate = <span className="tracking-widest">$85-$110 per ton of CO2.</span></p>
             </div>
              As per Meta AI, Llama-3-70B was trained for 6.4M GPU hours on 16k H100s with a peak FLOPs of 400e12 and emitted 1900 tCO2e, this translates to 400 hours of training time. Thus llama-3-70b is a ~9e24 model.
-            <p className="font-sans text-[14px] mt-4">Hourly gpu rates to calcuate cost of training are taken from <span className="font-semibold underline"><a href="https://lambdalabs.com/">lambdalabs</a></span>.</p>
+            <p className="font-sans text-[14px] mt-4">Hourly gpu rates to calculate cost of training are taken from <span className="font-semibold underline"><a href="https://lambdalabs.com/">lambdalabs</a></span>.</p>
           </CollapsibleContent>
         </Collapsible>
-        <p className="font-sans text-[14px] mt-4">These metrics are mere estiamtions based on a few assumptions and paper math scaling laws. Things like gpu cluster performance, costs and mfu can vary significantly due to multiple factors and are a great engineering challenge!.</p>
+        <p className="font-sans text-[14px] mt-4">These metrics are mere estimations based on a few assumptions and paper math scaling laws. Things like gpu cluster performance, costs and mfu can vary significantly due to multiple factors and are a great engineering challenge!.</p>
         <p className="font-sans text-[14px] mt-4">This tool is only to give you a glimpse of the maths and numbers that go behind model training.</p>
 
     </div>
