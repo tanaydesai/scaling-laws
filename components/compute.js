@@ -58,7 +58,7 @@ export const Compute = () => {
             <HoverCardTrigger className="w-full md:w-fit">
               <Input value={flops} onChange={(e) => {setFlops(e.target.value);getTotal(e.target.value, gpus, time)}} className="md:w-[100px] outline-none bg-gray-200" defaultValue={0}  type="number" /></HoverCardTrigger>
               <Select onValueChange={(e) => {setFlops(e);getTotal(e, gpus, time)}}>
-                <SelectTrigger className="w-fit bg-gray-200">
+                <SelectTrigger className="w-fit bg-gray-200 mt-2 md:mt-0">
                     <GoCpu />
                 </SelectTrigger>
                 <SelectContent className="w-fit bg-gray-200">
